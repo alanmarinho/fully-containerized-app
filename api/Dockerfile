@@ -4,7 +4,8 @@ RUN apk add --no-cache \
     build-base \
     python3 \
     libgcc \
-    libstdc++
+    libstdc++ \
+    dos2unix
 
 WORKDIR /app
 
@@ -22,6 +23,7 @@ RUN npm install --global @adonisjs/cli
 COPY ./.env ./build
 
 COPY entrypoint.sh /app/entrypoint.sh
+RUN dos2unix /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
 EXPOSE 3333
